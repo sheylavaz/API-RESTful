@@ -7,7 +7,7 @@
  */
 
 
-package dio.santander.doc;
+package dio.santander.api.doc;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
