@@ -46,7 +46,7 @@ public class UsuarioService {
 	public void save(Usuario usuario) { 
 		  //save(usuario); 
 		  if(usuario.getId()==null){ 
-			  save(usuario);
+			  usuarioRepository.save(usuario);
 			  System.out.println("SAVE - recebendo o usuario na camada de repositorio"); }
 		  else {
 			  System.out.println("UPDATE - Recebendo o usuario na camada de repositorio");
