@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dio.santander.api.DTO.UsuarioDTO;
 import dio.santander.api.model.Usuario;
 import dio.santander.api.service.UsuarioService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +28,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@GetMapping()
-	public List<UsuarioDTO> getUsers(){
+	public List<Usuario> getUsers(){
 		return usuarioService.findAll();
 	}
 	
@@ -43,6 +42,11 @@ public class UsuarioController {
 	
 	@PostMapping()
 	public void postUser(@RequestBody Usuario usuario) {
+		usuarioService.save(usuario);
+	}
+	
+	
+	public void updateUsuario(Usuario usuario) {
 		usuarioService.save(usuario);
 	}
 	

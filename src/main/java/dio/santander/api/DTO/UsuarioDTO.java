@@ -31,6 +31,8 @@ public class UsuarioDTO {
 		this.password = password;
 	}
 	
+	public UsuarioDTO() { }
+	
 	/**
 	 * @return the id
 	 */

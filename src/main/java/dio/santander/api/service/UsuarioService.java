@@ -11,11 +11,12 @@ package dio.santander.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dio.santander.api.DTO.UsuarioDTO;
 import dio.santander.api.model.Usuario;
 import dio.santander.api.repository.UsuarioRepository;
 
@@ -35,23 +36,27 @@ public class UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 	
-	public List<UsuarioDTO> findAll(){
+	public List<Usuario> findAll(){
 		System.out.println("Listando os usuario do sistema"); 
-		List<UsuarioDTO> usuarios = new ArrayList<>(); 
-		usuarios.add(new UsuarioDTO("svaz", "ss123"));
-		usuarios.add(new UsuarioDTO("smattos", "mm1234")); 
-		return usuarios; 
+		List<Usuario> usuariosLista = new ArrayList<>(); 
+		usuariosLista = usuarioRepository.findAll();
+		return usuariosLista; 
 	}
 	
 	public void save(Usuario usuario) { 
-		  //save(usuario); 
-		  if(usuario.getId()==null){ 
-			  usuarioRepository.save(usuario);
-			  System.out.println("SAVE - recebendo o usuario na camada de repositorio"); }
-		  else {
-			  System.out.println("UPDATE - Recebendo o usuario na camada de repositorio");
-		  } 
-		  System.out.println(usuario); 
+		if(usuario.getId()==null){
+			 usuarioRepository.save(usuario);
+			 System.out.println("SAVE - recebendo o usuario na camada de repositorio"); 
+		} else {
+			 Optional<Usuario> usuarioExistente = usuarioRepository.findById(usuario.getId());
+			 if(!usuarioExistente.isEmpty()) {
+				 usuarioRepository.save(usuario);
+			 } else {
+				  throw new NoSuchElementException("Usuario com ID " + usuario.getId() + "não encontrado! Revise as informações e tente novamente!");
+			}
+			System.out.println("UPDATE - Recebendo o usuario na camada de repositorio");
+		} 
+		System.out.println(usuario);
 	}
 	 	
 	 public void deleteById(Integer id) {
