@@ -17,6 +17,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dio.santander.api.handler.BusinessException;
 import dio.santander.api.model.Usuario;
 import dio.santander.api.repository.UsuarioRepository;
 
@@ -44,6 +45,9 @@ public class UsuarioService {
 	}
 	
 	public void save(Usuario usuario) { 
+		if(usuario.getLogin()==null) {
+			//throw new BusinessException("O campo nome não foi preenchido! Por favor reveja as informações");
+		}
 		if(usuario.getId()==null){
 			 usuarioRepository.save(usuario);
 			 System.out.println("SAVE - recebendo o usuario na camada de repositorio"); 
