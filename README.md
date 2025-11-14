@@ -46,7 +46,7 @@ mvn spring-boot:run
 📚 Documentação da API (Swagger UI)
 A documentação interativa da API está disponível através do Swagger UI.
 
-Endpoint de Documentação: http://localhost:8080/swagger-ui.html
+Endpoint de Documentação: http://localhost:8080/swagger-ui/index.html
 
 Use esta interface para visualizar todos os endpoints disponíveis (GET, POST, DELETE, etc.).
 
